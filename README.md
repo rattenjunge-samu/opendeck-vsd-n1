@@ -72,3 +72,10 @@ $ just package
 ## Acknowledgments
 
 This plugin is heavily based on work by contributors of [elgato-streamdeck](https://github.com/streamduck-org/elgato-streamdeck) crate
+
+Further inspiration was taken from these sister repos:
+- https://github.com/naerschhersch/opendeck-akp05
+- https://github.com/GrauBlitz/opendeck-akp05
+- https://github.com/maillota/opendeck-akp05
+
+The icon was yoinked from https://github.com/naerschhersch/opendeck-akp05/
