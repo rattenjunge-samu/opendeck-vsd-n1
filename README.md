@@ -12,6 +12,7 @@ Requires OpenDeck 2.5.0 or newer
 
 - Mirabox N4 (6603:1007)
 - Ajazz AKP05E (0300:3004)
+- VSDInside N4 Pro (5548:1023)
 
 ## Platform support
 
