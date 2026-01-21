@@ -124,13 +124,7 @@ async fn sigterm() -> Result<(), Box<dyn std::error::Error>> {
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    simplelog::TermLogger::init(
-        simplelog::LevelFilter::Info,
-        simplelog::Config::default(),
-        simplelog::TerminalMode::Stdout,
-        simplelog::ColorChoice::Never,
-    )
-    .unwrap();
+    env_logger::Builder::from_env(env_logger::Env::default().default_filter_or("info")).init();
 
     tokio::select! {
         _ = connect() => {},
