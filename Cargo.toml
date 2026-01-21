@@ -13,3 +13,7 @@ openaction = "1.1.5"
 simplelog = "0.12.2"
 tokio = { version = "1.44.2", features = ["full"] }
 tokio-util = { version = "0.7.15", features = ["full"] }
+
+[patch.crates-io]
+mirajazz = { git = "https://github.com/ambiso/mirajazz.git" }
+# mirajazz = { path = "./mirajazz" }

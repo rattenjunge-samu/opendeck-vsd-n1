@@ -109,7 +109,10 @@ pub async fn connect(candidate: &CandidateDevice) -> Result<Device, MirajazzErro
     .await;
 
     match result {
-        Ok(device) => Ok(device),
+        Ok(device) => {
+            Ok(device
+                .with_supports_both_encoder_states(candidate.kind.supports_both_encoder_states()))
+        }
         Err(e) => {
             log::error!("Error while connecting to device: {e}");
 

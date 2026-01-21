@@ -100,11 +100,7 @@ impl Kind {
     /// Returns protocol version for device
     pub fn protocol_version(&self) -> usize {
         match self {
-            Self::N4EN => 3,
-            Self::Akp05E => 3,
-            Self::N4Pro => 3,
-            Self::MsdPro => 3,
-            Self::CN003 => 3,
+            _ => 3,
         }
     }
 
@@ -141,6 +137,10 @@ impl Kind {
             rotation: ImageRotation::Rot0,
             mirror: ImageMirroring::None,
         };
+    }
+
+    pub fn supports_both_encoder_states(&self) -> bool {
+        false
     }
 }
 
