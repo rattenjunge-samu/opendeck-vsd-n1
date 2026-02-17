@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.9.2] - 2026-02-17
+
+Add support for Redragon SS552
+
 ## [0.9.1] - 2026-01-24
 
 Add support for all mirabox devices and VSDInside N4 Pro

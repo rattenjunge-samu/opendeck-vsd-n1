@@ -578,7 +578,7 @@ dependencies = [
 
 [[package]]
 name = "opendeck-akp05"
-version = "0.9.1"
+version = "0.9.2"
 dependencies = [
  "data-url",
  "env_logger",
