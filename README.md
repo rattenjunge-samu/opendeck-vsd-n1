@@ -1,5 +1,3 @@
-![Plugin Icon](assets/icon.png)
-
 # OpenDeck VSD Inside N1 Plugin
 
 An unofficial plugin for VSD Inside N1

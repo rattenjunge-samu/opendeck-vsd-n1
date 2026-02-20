@@ -3,10 +3,10 @@
   "Description": "Device support plugin for VSD Inside N1",
   "Author": "rattenjunge",
   "Version": "0.0.1",
-  "PluginUUID": "com.github.ambiso.opendeck-akp05",
-  "CodePathLin": "opendeck-akp05-linux",
-  "CodePathMac": "opendeck-akp05-mac",
-  "CodePathWin": "opendeck-akp05-win.exe",
+  "PluginUUID": "com.github.rattenjunge-samu.opendeck-n1",
+  "CodePathLin": "opendeck-n1-linux",
+  "CodePathMac": "opendeck-n1-mac",
+  "CodePathWin": "opendeck-n1-win.exe",
   "Icon": "assets/icon",
   "Category": "Hardware",
   "OS": [
@@ -15,5 +15,5 @@
     { "Platform": "windows", "MinimumVersion": "10" }
   ],
   "Actions": [],
-  "DeviceNamespace": "n4"
+  "DeviceNamespace": "n1"
 }

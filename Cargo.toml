@@ -1,7 +1,7 @@
 [package]
-name = "opendeck-vsd-n1"
+name = "opendeck-n1"
 version = "0.0.1"
-edition = "2026"
+edition = "2024"
 
 [dependencies]
 data-url = "0.3.1"
@@ -10,10 +10,6 @@ image = { version = "0.25.6", default-features = false, features = ["bmp", "jpeg
 log = "0.4.27"
 mirajazz = "0.9.0"
 openaction = "1.1.5"
-env_logger = "0.11"
+simplelog = "0.12.2"
 tokio = { version = "1.44.2", features = ["full"] }
 tokio-util = { version = "0.7.15", features = ["full"] }
-
-[patch.crates-io]
-mirajazz = { git = "https://github.com/ambiso/mirajazz.git" }
-# mirajazz = { path = "./mirajazz" }
