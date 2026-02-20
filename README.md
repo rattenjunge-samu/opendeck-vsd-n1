@@ -1,8 +1,15 @@
 ![Plugin Icon](assets/icon.png)
 
-# OpenDeck Ajazz AKP05 / Mirabox N4 Plugin
+# OpenDeck VSD Inside N1 Plugin
 
-An unofficial plugin for Mirabox N4-family devices
+An unofficial plugin for VSD Inside N1
+
+## Disclaimer
+
+This is a fork of the apk05 plugin that I heavily vibecoded using codex to get something that is somehow working.
+I have no idea how any of this works and don't provide any support.
+
+For similar devices (Mirajazz N1 and so on) you may just have to adapt the udev rules, rebuild the package and using this as plugin it may work.
 
 ## OpenDeck version
 
@@ -10,24 +17,9 @@ Requires OpenDeck 2.5.0 or newer
 
 ## Supported devices
 
-- Mirabox N4E (6603:1007)
-- Mirabox N4 (6602:1001)
-- Mirabox N4 Pro E (5548:1021)
-- Mirabox N4 Pro (5548:1008)
-- Ajazz AKP05E (0300:3004)
-- Ajazz AKP05E Pro (0300:3013)
-- VSDInside N4 Pro (5548:1023)
-- Mars Gaming MSD-Pro (0B00:1003)
-- Soomfon CN003 (1500:3002)
-- Redragon SS552 (0200:3001)
+- VSD Inside N1 (5548:1002)
 
 ## Platform support
-
-- Linux: Guaranteed, if stuff breaks - I'll probably catch it before public release
-- Mac: Zero effort, no tests before release, if stuff breaks - too bad, it's up to you to contribute fixes
-- Windows: Zero effort, no tests before release, if stuff breaks - too bad, it's up to you to contribute fixes
-
-## Installation
 
 1. Download an archive from [releases](https://github.com/4ndv/opendeck-akp03/releases)
 2. In OpenDeck: Plugins -> Install from file
@@ -79,11 +71,6 @@ $ just package
 
 ## Acknowledgments
 
-This plugin is heavily based on work by contributors of [elgato-streamdeck](https://github.com/streamduck-org/elgato-streamdeck) crate
+All work is based on all the other opendeck plugins for these non-elgato devices
 
-Further inspiration was taken from these sister repos:
-- https://github.com/naerschhersch/opendeck-akp05
-- https://github.com/GrauBlitz/opendeck-akp05
-- https://github.com/maillota/opendeck-akp05
-
-The icon was yoinked from https://github.com/naerschhersch/opendeck-akp05/
+Take a look at the opendeck discord if you want more info

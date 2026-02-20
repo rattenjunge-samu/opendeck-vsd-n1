@@ -1,8 +1,8 @@
 {
-  "Name": "Ajazz AKP05 / Mirabox N4",
-  "Description": "Device support plugin for Ajazz AKP05 (+variants)",
-  "Author": "ambiso",
-  "Version": "0.9.2",
+  "Name": "VSD Inside N1",
+  "Description": "Device support plugin for VSD Inside N1",
+  "Author": "rattenjunge",
+  "Version": "0.0.1",
   "PluginUUID": "com.github.ambiso.opendeck-akp05",
   "CodePathLin": "opendeck-akp05-linux",
   "CodePathMac": "opendeck-akp05-mac",

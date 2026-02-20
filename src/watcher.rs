@@ -21,6 +21,17 @@ fn device_info_to_candidate(dev: HidDeviceInfo) -> Option<CandidateDevice> {
     let id = serial_to_id(&dev.serial_number.clone()?);
     let kind = Kind::from_vid_pid(dev.vendor_id, dev.product_id)?;
 
+    log::debug!(
+        "Matched candidate id={} kind={} vid=0x{:04x} pid=0x{:04x} serial={}",
+        id,
+        kind.human_name(),
+        dev.vendor_id,
+        dev.product_id,
+        dev.serial_number
+            .clone()
+            .unwrap_or_else(|| "<none>".to_string())
+    );
+
     Some(CandidateDevice { id, dev, kind })
 }
 
@@ -50,7 +61,13 @@ pub async fn watcher_task(token: CancellationToken) -> Result<(), MirajazzError>
     log::info!("Looking for connected devices");
 
     for candidate in candidates {
-        log::info!("New candidate {:#?}", candidate);
+        log::info!(
+            "Found connected candidate id={} kind={} vid=0x{:04x} pid=0x{:04x}",
+            candidate.id,
+            candidate.kind.human_name(),
+            candidate.dev.vendor_id,
+            candidate.dev.product_id
+        );
 
         let token = CancellationToken::new();
 
@@ -78,9 +95,18 @@ pub async fn watcher_task(token: CancellationToken) -> Result<(), MirajazzError>
 
             match ev {
                 DeviceLifecycleEvent::Connected(info) => {
+                    log::info!(
+                        "USB connected vid=0x{:04x} pid=0x{:04x} serial={}",
+                        info.vendor_id,
+                        info.product_id,
+                        info.serial_number
+                            .clone()
+                            .unwrap_or_else(|| "<none>".to_string())
+                    );
                     if let Some(candidate) = device_info_to_candidate(info) {
                         // Don't add existing device again
                         if DEVICES.read().await.contains_key(&candidate.id) {
+                            log::debug!("Skipping duplicate connected event for {}", candidate.id);
                             continue;
                         }
 
@@ -91,13 +117,29 @@ pub async fn watcher_task(token: CancellationToken) -> Result<(), MirajazzError>
                             .await
                             .insert(candidate.id.clone(), token.clone());
 
-                        log::debug!("Spawning task for new device: {:?}", candidate);
+                        log::info!(
+                            "Spawning device task for id={} ({})",
+                            candidate.id,
+                            candidate.kind.human_name()
+                        );
                         tracker.spawn(device_task(candidate, token));
                         log::debug!("Spawned");
                     }
                 }
                 DeviceLifecycleEvent::Disconnected(info) => {
-                    let id = serial_to_id(&info.serial_number.unwrap());
+                    log::info!(
+                        "USB disconnected vid=0x{:04x} pid=0x{:04x} serial={}",
+                        info.vendor_id,
+                        info.product_id,
+                        info.serial_number
+                            .clone()
+                            .unwrap_or_else(|| "<none>".to_string())
+                    );
+                    let Some(serial) = info.serial_number else {
+                        log::warn!("Disconnected event without serial, ignoring");
+                        continue;
+                    };
+                    let id = serial_to_id(&serial);
 
                     if let Some(token) = TOKENS.write().await.remove(&id) {
                         log::info!("Sending cancel request for {}", id);

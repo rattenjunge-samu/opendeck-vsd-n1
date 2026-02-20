@@ -1,7 +1,7 @@
 use device::{handle_error, handle_set_image};
 use mirajazz::device::Device;
 use openaction::*;
-use std::{collections::HashMap, process::exit, sync::LazyLock};
+use std::{collections::HashMap, env, process::exit, sync::LazyLock};
 use tokio::sync::{Mutex, RwLock};
 use tokio_util::{sync::CancellationToken, task::TaskTracker};
 use watcher::watcher_task;
@@ -104,6 +104,20 @@ async fn connect() {
     }
 }
 
+fn parse_log_level() -> simplelog::LevelFilter {
+    let raw = env::var("OPENDECK_AKP05_LOG").unwrap_or_else(|_| "debug".to_string());
+
+    match raw.to_ascii_lowercase().as_str() {
+        "off" => simplelog::LevelFilter::Off,
+        "error" => simplelog::LevelFilter::Error,
+        "warn" | "warning" => simplelog::LevelFilter::Warn,
+        "info" => simplelog::LevelFilter::Info,
+        "debug" => simplelog::LevelFilter::Debug,
+        "trace" => simplelog::LevelFilter::Trace,
+        _ => simplelog::LevelFilter::Debug,
+    }
+}
+
 #[cfg(any(target_os = "linux", target_os = "macos"))]
 async fn sigterm() -> Result<(), Box<dyn std::error::Error>> {
     let mut sig = signal(SignalKind::terminate())?;
@@ -124,7 +138,23 @@ async fn sigterm() -> Result<(), Box<dyn std::error::Error>> {
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    env_logger::Builder::from_env(env_logger::Env::default().default_filter_or("info")).init();
+    let log_level = parse_log_level();
+
+    simplelog::TermLogger::init(
+        log_level,
+        simplelog::Config::default(),
+        simplelog::TerminalMode::Stdout,
+        simplelog::ColorChoice::Never,
+    )
+    .unwrap();
+
+    log::info!("Logger initialized with level {:?}", log_level);
+    log::info!(
+        "Plugin build version {} (with N1 mode+keepalive patches)",
+        env!("CARGO_PKG_VERSION")
+    );
+    log::info!("N1 startup mode: env OPENDECK_AKP05_N1_MODE (default: 3)");
+    log::info!("Set OPENDECK_AKP05_LOG=trace for maximum detail");
 
     tokio::select! {
         _ = connect() => {},
