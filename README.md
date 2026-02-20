@@ -7,7 +7,9 @@ An unofficial plugin for VSD Inside N1
 This is a fork of the apk05 plugin that I heavily vibecoded using codex to get something that is somehow working.
 I have no idea how any of this works and don't provide any support.
 
-For similar devices (Mirajazz N1 and so on) you may just have to adapt the udev rules, rebuild the package and using this as plugin it may work.
+For similar devices (Mirabox N1 and so on) you may just have to adapt the udev rules, rebuild the package and using this as plugin it may work.
+
+I added a build script _build_with_docker.sh_ for building
 
 ## OpenDeck version
 
@@ -19,9 +21,9 @@ Requires OpenDeck 2.5.0 or newer
 
 ## Platform support
 
-1. Download an archive from [releases](https://github.com/4ndv/opendeck-akp03/releases)
+1. Download an archive from [releases](https://github.com/rattenjunge-samu/opendeck-vsd-n1/releases)
 2. In OpenDeck: Plugins -> Install from file
-3. Download [udev rules](./40-opendeck-akp03.rules) and install them by copying into `/etc/udev/rules.d/` and running `sudo udevadm control --reload-rules`
+3. Download [udev rules](./40-opendeck-vsd-n1.rules) and install them by copying into `/etc/udev/rules.d/` and running `sudo udevadm control --reload-rules`
 4. Unplug and plug again the device, restart OpenDeck
 
 ## Adding new devices
